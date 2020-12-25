@@ -1,0 +1,5 @@
+#! /bin/bash
+fname="$(tr ' ' '_' <<< $1)"
+payload='data=area[admin_level=4][name="'$1'"]->.sarea;nwr[religion](area.sarea);out center;'
+echo $payload
+curl -o $fname.osm -g http://overpass-api.de/api/interpreter --data-urlencode "$payload"

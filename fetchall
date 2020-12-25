@@ -1,0 +1,10 @@
+#! /bin/bash
+input="states"
+while read -r line
+do
+    fname="$(tr ' ' '_' <<< $line)"
+    payload='data=area[admin_level=4][name="'$line'"]->.sarea;nwr[religion](area.sarea);out center;'
+    echo $payload
+    curl -o $fname.osm -g http://overpass-api.de/api/interpreter --data-urlencode "$payload"
+    sleep 10
+done < "$input"
